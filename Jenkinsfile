@@ -10,7 +10,7 @@ pipeline {
 
         stage('Build Docker Images') {
             steps {
-                sh 'docker-compose build'
+                sh 'export PATH=$PATH:/usr/local/bin/docker-compose && docker-compose build'
             }
         }
 
