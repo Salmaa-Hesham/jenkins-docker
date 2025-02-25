@@ -1,5 +1,26 @@
 pipeline {
     agent any
+    environment {
+        DEBUG = 'true'
+    }
+    stages {
+        stage('Debug Info') {
+            steps {
+                sh '''
+                echo "Current User: $(whoami)"
+                echo "Home Directory: $HOME"
+                echo "Current Directory: $(pwd)"
+                echo "Jenkins Workspace: $WORKSPACE"
+                echo "User ID: $(id)"
+                echo "Groups: $(groups)"
+                echo "PATH: $PATH"
+                echo "Docker Version:"
+                docker --version || echo "Docker not found"
+                echo "Docker Compose Version:"
+                docker-compose --version || echo "Docker Compose not found"
+                '''
+            }
+        }
 
     stages {
         stage('Checkout Code') {
