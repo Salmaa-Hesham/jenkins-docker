@@ -10,6 +10,7 @@ pipeline {
 
         stage('Build Docker Images') {
             steps {
+                sh 'whoami'
                 sh '/usr/local/bin/docker-compose build'
             }
         }
